@@ -75,11 +75,11 @@ spec:
                   name: harness-secrets
                   key: timescaledbAdminPassword
             - name: MONGO_URI
-              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/ng-harness?authSource=admin'
+              value: {{ include "harnesscommon.database.mongo" (dict "database" "ng-harness" "context" $) }}
             - name : NOTIFICATION_MONGO_URI
-              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/notifications?authSource=admin'
+              value: {{ include "harnesscommon.database.mongo" (dict "database" "notifications" "context" $) }}
             - name: PMS_MONGO_URI
-              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/pms-harness?authSource=admin'
+              value: {{ include "harnesscommon.database.mongo" (dict "database" "pms-harness" "context" $) }}
             - name: TIMESCALEDB_USERNAME
               value: postgres
             - name: TIMESCALE_URI
