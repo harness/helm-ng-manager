@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ng-manager
+  namespace: {{ .Release.Namespace }}
+data:
+  CACHE_BACKEND: "REDIS"
+  DEPLOY_MODE: KUBERNETES_ONPREM
+  MANAGER_TARGET: harness-manager:9879
+  MANAGER_AUTHORITY: default-authority.harness.io
+  NG_MANAGER_TARGET: ng-manager:13002
+  NG_MANAGER_AUTHORITY: default-authority.harness.io
+  EVENTS_FRAMEWORK_REDIS_URL: 'redis://localhost:6379'
+  EVENTS_FRAMEWORK_USE_SENTINEL: "true"
+  EVENTS_FRAMEWORK_SENTINEL_MASTER_NAME: 'harness-redis'
+  EVENTS_FRAMEWORK_REDIS_SENTINELS: 'redis://redis-sentinel-harness-announce-0.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-1.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-2.{{ .Release.Namespace }}:26379'
+  GRPC_SERVER_PORT: "9979"
+  SHOULD_CONFIGURE_WITH_PMS: "true"
+  PMS_GITSYNC_TARGET:  pipeline-service:14002
+  PMS_GITSYNC_AUTHORITY:  default-authority.harness.io
+  TEMPLATE_GITSYNC_TARGET:  template-service:16002
+  TEMPLATE_GITSYNC_AUTHORITY:  default-authority.harness.io
+  PMS_TARGET:  pipeline-service:12011
+  PMS_AUTHORITY:  default-authority.harness.io
+  MEMORY: {{ .Values.java.memory | quote }}
+  LOGGING_LEVEL: {{ .Values.appLogLevel }}
+  LOCK_CONFIG_REDIS_SENTINELS: 'redis://redis-sentinel-harness-announce-0.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-1.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-2.{{ .Release.Namespace }}:26379'
+  LOCK_CONFIG_SENTINEL_MASTER_NAME: "harness-redis"
+  LOCK_CONFIG_USE_SENTINEL: "true"
+  LOG_STREAMING_SERVICE_TOKEN: c76e567a-b341-404d-a8dd-d9738714eb82
+  USE_REDIS_FOR_SDK_RESPONSE_EVENTS: "true"
+  MOCK_ACCESS_CONTROL_SERVICE: "false"
+  ACCESS_CONTROL_ENABLED: "true"
+  ENABLE_DEFAULT_RESOURCE_GROUP_CREATION: "true"
+  ENABLE_DASHBOARD_TIMESCALE: "true"
+  AUDIT_ENABLED: "true"
+  SCM_SERVICE_URI: "scm:8091"
+  MANAGER_CLIENT_BASEURL: '{{ .Values.global.loadbalancerURL }}/api/'
+  NG_MANAGER_CLIENT_BASEURL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  MANAGER_UI_URL:  '{{ .Values.global.loadbalancerURL }}'
+  NG_MANAGER_API_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  NG_MANAGER_UI_URL: '{{ .Values.global.loadbalancerURL }}/ng/#/'
+  LOG_STREAMING_SERVICE_BASEURL: '{{ .Values.global.loadbalancerURL }}/gateway/log-service/'
+  ACCESS_CONTROL_BASE_URL: '{{ .Values.global.loadbalancerURL }}/authz/api/'
+  RESOURCE_GROUP_BASE_URL: '{{ .Values.global.loadbalancerURL }}/resourcegroup/api/'
+  AUDIT_CLIENT_BASEURL: '{{ .Values.global.loadbalancerURL }}/audit/api/'
+  CURRENT_GEN_UI_URL: '{{ .Values.global.loadbalancerURL }}/#/'

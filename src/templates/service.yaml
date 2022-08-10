@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ng-manager
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ng-manager.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: http-ng-manager
+    port: {{ .Values.service.port }}
+    protocol: TCP
+    targetPort: {{ .Values.service.port }}
+  - name: ng-manager-grpc
+    port: {{ .Values.service.grpcport }}
+    protocol: TCP
+    targetPort: {{ .Values.service.grpcport }}
+  - name: git-sync-grpc
+    port: {{ .Values.service.gitsyncgrpcport }}
+    protocol: TCP
+    targetPort: {{ .Values.service.gitsyncgrpcport }}
+  selector:
+    {{- include "ng-manager.selectorLabels" . | nindent 4 }}
+  sessionAffinity: None

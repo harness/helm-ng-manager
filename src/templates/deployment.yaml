@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ng-manager
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ng-manager.labels" . | nindent 4 }}
+spec:
+  progressDeadlineSeconds: 800
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{.Values.maxSurge}}
+      maxUnavailable: {{.Values.maxUnavailable}}
+  selector:
+    matchLabels:
+      {{- include "ng-manager.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "ng-manager.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "ng-manager.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: check-for-harness-manager
+          image: {{ .Values.initContainers.check.image.repository}}:{{.Values.initContainers.check.image.tag}}
+          command: ["sh","-c"]
+          args: ['until nc -vz harness-manager:9090 > /dev/null; do echo "harness-manager is unavailable - sleeping"; sleep 2; done ; echo "harness-manager is up" ']
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: ng-manager
+        image: {{ include "harnesscommon.names.imagename" . }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        ports:
+        - name: http-ng-manager
+          containerPort: {{ .Values.service.port }}
+          protocol: "TCP"
+        - name: ng-manager-grpc
+          containerPort: {{ .Values.service.grpcport }}
+          protocol: "TCP"
+        - name: git-sync-grpc
+          containerPort: {{ .Values.service.gitsyncgrpcport }}
+          protocol: "TCP"
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        env:
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: harness-secret
+                  key: mongodbUsername
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: harness-secret
+                  key: mongodbPassword
+            - name : TIMESCALE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: harness-secret
+                  key: timescaledbAdminPassword
+            - name: MONGO_URI
+              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/ng-harness?authSource=admin'
+            - name : NOTIFICATION_MONGO_URI
+              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/notifications?authSource=admin'
+            - name: PMS_MONGO_URI
+              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/pms-harness?authSource=admin'
+            - name: TIMESCALEDB_USERNAME
+              value: postgres
+            - name: TIMESCALE_URI
+              value: 'jdbc:postgresql://timescaledb-single-chart.{{ .Release.Namespace }}:5432/harness'
+        envFrom:
+        - configMapRef:
+            name: ng-manager
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: {{ .Values.service.port }}
+          initialDelaySeconds: 180
+          timeoutSeconds: 10
+          periodSeconds: 10
+          failureThreshold: 20
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: {{ .Values.service.port }}
+          initialDelaySeconds: 180
+          timeoutSeconds: 10
+          periodSeconds: 10
+          failureThreshold: 10     
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - ng-manager
+            topologyKey: "kubernetes.io/hostname"
+      {{- with .Values.affinity }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

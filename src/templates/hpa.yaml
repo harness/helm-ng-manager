@@ -1,0 +1,19 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ng-manager
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ng-manager.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ng-manager
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  {{- if .Values.autoscaling.targetCPUUtilizationPercentage }}
+  targetCPUUtilizationPercentage : {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+  {{ end }}
+{{- end }}

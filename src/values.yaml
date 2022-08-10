@@ -1,0 +1,84 @@
+# Default values for ng-manager
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  loadbalancerURL: "http://test/abc"
+replicaCount: 1
+maxSurge: 1
+maxUnavailable: 0
+
+appLogLevel: "INFO"
+
+image:
+  repository: harness/ng-manager-signed
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "76019"
+
+java:
+  memory: "4096m"
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "harness-default"
+
+podAnnotations: {}
+
+imagePullSecrets: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  runAsUser: 65534
+  runAsNonRoot: true
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+initContainers:
+  check:
+    image:
+      tag: 1.33.1
+      repository: busybox
+
+service:
+  type: ClusterIP
+  protocol: TCP
+  port: 7090
+  grpcport: 9979
+  gitsyncgrpcport: 13002
+
+
+resources:
+  limits:
+    cpu: 2
+    memory: 8192Mi
+  requests:
+    cpu: 2
+    memory: 200Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
