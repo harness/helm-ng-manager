@@ -3,16 +3,16 @@ entries:
   ng-manager:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-08-11T10:18:46.016829-04:00"
+    created: "2022-08-11T21:08:20.383532+05:30"
     dependencies:
     - name: harness-common
       repository: https://harness.github.io/helm-common/charts
       version: 0.1.1
     description: A Helm chart for Kubernetes
-    digest: a0cf65b7eed8914b45e2fd119a08b10b6cb68e04bfbd8f1fb584c115dc412b87
+    digest: 6aed75af4edf9b59eef1b2f6658e9808a9d1c54f111d75fea0cfee45b4e18115
     name: ng-manager
     type: application
     urls:
     - ng-manager-0.1.0.tgz
     version: 0.1.0
-generated: "2022-08-11T10:18:46.015548-04:00"
+generated: "2022-08-11T21:08:20.382099+05:30"
