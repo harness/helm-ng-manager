@@ -13,7 +13,7 @@ image:
   repository: harness/ng-manager-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "76019"
 
 java:
   memory: "4096m"
