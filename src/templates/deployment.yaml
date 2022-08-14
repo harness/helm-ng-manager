@@ -73,7 +73,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: harness-secrets
-                  key: timescaledbAdminPassword
+                  key: timescaledbPostgresPassword
             - name: MONGO_URI
               value: {{ include "harnesscommon.database.mongo" (dict "database" "ng-harness" "context" $) }}
             - name : NOTIFICATION_MONGO_URI
