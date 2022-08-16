@@ -12,11 +12,11 @@ spec:
     port: {{ .Values.service.port }}
     protocol: TCP
     targetPort: {{ .Values.service.port }}
-  - name: ng-manager-grpc
+  - name: grpc-ng-manager
     port: {{ .Values.service.grpcport }}
     protocol: TCP
     targetPort: {{ .Values.service.grpcport }}
-  - name: git-sync-grpc
+  - name: grpc-git-sync
     port: {{ .Values.service.gitsyncgrpcport }}
     protocol: TCP
     targetPort: {{ .Values.service.gitsyncgrpcport }}

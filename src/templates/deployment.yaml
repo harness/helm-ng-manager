@@ -50,10 +50,10 @@ spec:
         - name: http-ng-manager
           containerPort: {{ .Values.service.port }}
           protocol: "TCP"
-        - name: ng-manager-grpc
+        - name: grpc-ng-manager
           containerPort: {{ .Values.service.grpcport }}
           protocol: "TCP"
-        - name: git-sync-grpc
+        - name: grpc-git-sync
           containerPort: {{ .Values.service.gitsyncgrpcport }}
           protocol: "TCP"
         resources:
