@@ -10,10 +10,20 @@ maxUnavailable: 0
 appLogLevel: "INFO"
 
 image:
+  registry: docker.io
   repository: harness/ng-manager-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "76019"
+  digest: ""
+
+initContainer:
+  image:
+    registry: docker.io
+    repository: busybox
+    tag: "1.35.0"
+    digest: ""
+
 
 java:
   memory: "4096m"
@@ -75,4 +85,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-

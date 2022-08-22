@@ -37,12 +37,12 @@ spec:
       terminationGracePeriodSeconds: 30
       initContainers:
       - name: wait
-        image: busybox:1.35.0
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.initContainer.image "global" .Values.global) }}
         imagePullPolicy: IfNotPresent
         command: ['sh', '-c', "sleep 300"]
       containers:
       - name: ng-manager
-        image: {{ include "harnesscommon.names.imagename" . }}
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         securityContext:
           {{- toYaml .Values.securityContext | nindent 12 }}
@@ -102,7 +102,7 @@ spec:
           initialDelaySeconds: 180
           timeoutSeconds: 10
           periodSeconds: 10
-          failureThreshold: 10     
+          failureThreshold: 10
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
