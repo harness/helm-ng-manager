@@ -36,10 +36,12 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       terminationGracePeriodSeconds: 30
       initContainers:
-      - name: wait
-        image: {{ include "common.images.image" (dict "imageRoot" .Values.initContainer.image "global" .Values.global) }}
+      - name: wait-for-harness-manager
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
         imagePullPolicy: IfNotPresent
-        command: ['sh', '-c', "sleep 300"]
+        args:
+          - "pod"
+          - "-lapp=harness-manager"
       containers:
       - name: ng-manager
         image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
