@@ -7,9 +7,9 @@ data:
   CACHE_BACKEND: "REDIS"
   DEPLOY_MODE: KUBERNETES_ONPREM
   MANAGER_TARGET: harness-manager:9879
-  MANAGER_AUTHORITY: default-authority.harness.io
+  MANAGER_AUTHORITY: harness-manager:9879
   NG_MANAGER_TARGET: ng-manager:13002
-  NG_MANAGER_AUTHORITY: default-authority.harness.io
+  NG_MANAGER_AUTHORITY: ng-manager:13002
   EVENTS_FRAMEWORK_REDIS_URL: 'redis://localhost:6379'
   EVENTS_FRAMEWORK_USE_SENTINEL: "true"
   EVENTS_FRAMEWORK_SENTINEL_MASTER_NAME: 'harness-redis'
@@ -17,11 +17,11 @@ data:
   GRPC_SERVER_PORT: "9979"
   SHOULD_CONFIGURE_WITH_PMS: "true"
   PMS_GITSYNC_TARGET:  pipeline-service:14002
-  PMS_GITSYNC_AUTHORITY:  default-authority.harness.io
+  PMS_GITSYNC_AUTHORITY:  pipeline-service:14002
   TEMPLATE_GITSYNC_TARGET:  template-service:16002
-  TEMPLATE_GITSYNC_AUTHORITY:  default-authority.harness.io
+  TEMPLATE_GITSYNC_AUTHORITY:  template-service:16002
   PMS_TARGET:  pipeline-service:12011
-  PMS_AUTHORITY:  default-authority.harness.io
+  PMS_AUTHORITY:  pipeline-service:12011
   MEMORY: {{ .Values.java.memory | quote }}
   LOGGING_LEVEL: {{ .Values.appLogLevel }}
   LOCK_CONFIG_REDIS_SENTINELS: 'redis://redis-sentinel-harness-announce-0.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-1.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-2.{{ .Release.Namespace }}:26379'
