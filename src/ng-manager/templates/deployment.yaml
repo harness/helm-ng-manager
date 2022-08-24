@@ -25,6 +25,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        app: ng-manager
         {{- include "ng-manager.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -42,6 +43,12 @@ spec:
         args:
           - "pod"
           - "-lapp=harness-manager"
+      - name: wait-for-pipeline-service
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+        imagePullPolicy: IfNotPresent
+        args:
+          - "pod"
+          - "-lapp=app.kubernetes.io/name:pipeline-service"
       containers:
       - name: ng-manager
         image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
