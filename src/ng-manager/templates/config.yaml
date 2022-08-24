@@ -35,7 +35,7 @@ data:
   ENABLE_DASHBOARD_TIMESCALE: "true"
   AUDIT_ENABLED: "true"
   SCM_SERVICE_URI: "scm:8091"
-  MANAGER_CLIENT_BASEURL: '{{ .Values.global.loadbalancerURL }}/api/'
+  MANAGER_CLIENT_BASEURL: http://harness-manager.{{ .Release.namespace }}.svc.cluster.local:9090/api/
   NG_MANAGER_CLIENT_BASEURL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
   MANAGER_UI_URL:  '{{ .Values.global.loadbalancerURL }}'
   NG_MANAGER_API_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
