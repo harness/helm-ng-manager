@@ -2,6 +2,7 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: ng-manager
+  namespace: {{ .Release.Namespace }}
 spec:
   minAvailable: "50%"
   selector:
