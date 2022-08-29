@@ -1,1 +1,1 @@
-#Helm chart for ng-manager
+src/ng-manager/README.md
