@@ -45,3 +45,4 @@ data:
   RESOURCE_GROUP_BASE_URL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
   AUDIT_CLIENT_BASEURL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
   CURRENT_GEN_UI_URL: '{{ .Values.global.loadbalancerURL }}/#/'
+  HARNESS_ENABLE_NG_AUTH_UI_PLACEHOLDER: "true"
