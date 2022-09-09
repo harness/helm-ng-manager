@@ -90,22 +90,7 @@ spec:
         envFrom:
         - configMapRef:
             name: ng-manager
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: {{ .Values.service.port }}
-          initialDelaySeconds: 180
-          timeoutSeconds: 10
-          periodSeconds: 10
-          failureThreshold: 20
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: {{ .Values.service.port }}
-          initialDelaySeconds: 180
-          timeoutSeconds: 10
-          periodSeconds: 10
-          failureThreshold: 10
+        {{- toYaml .Values.probes | nindent 8}}
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
