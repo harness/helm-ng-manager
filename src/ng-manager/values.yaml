@@ -77,6 +77,29 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
+probes:
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: http-ng-manager
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 5
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: http-ng-manager
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 5
+  startupProbe:
+    httpGet:
+      path: /health
+      port: http-ng-manager
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 25
+
 service:
   type: ClusterIP
   protocol: TCP
