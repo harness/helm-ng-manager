@@ -3,6 +3,20 @@ entries:
   ng-manager:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-09-09T16:12:32.298784712Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 4c60a19b15188bde2bb1dfa13094585a4422ad5728b3d9929fd9f0db6a12a3ff
+    name: ng-manager
+    type: application
+    urls:
+    - https://github.com/harness/helm-ng-manager/releases/download/ng-manager-0.2.16/ng-manager-0.2.16.tgz
+    version: 0.2.16
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-09-08T18:30:32.623897333Z"
     dependencies:
     - name: harness-common
@@ -267,4 +281,4 @@ entries:
     urls:
     - https://github.com/harness/helm-ng-manager/releases/download/ng-manager-0.2.0/ng-manager-0.2.0.tgz
     version: 0.2.0
-generated: "2022-09-08T18:30:32.624007735Z"
+generated: "2022-09-09T16:12:32.298893417Z"
