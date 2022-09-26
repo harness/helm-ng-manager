@@ -9,6 +9,10 @@ maxUnavailable: 0
 
 appLogLevel: "INFO"
 
+license:
+  enabled: false
+  licensekey: 'anexamplelicensekey'
+
 image:
   registry: docker.io
   repository: harness/ng-manager-signed
