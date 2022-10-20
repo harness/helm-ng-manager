@@ -46,6 +46,7 @@ data:
   AUDIT_CLIENT_BASEURL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
   CURRENT_GEN_UI_URL: '{{ .Values.global.loadbalancerURL }}/#/'
   HARNESS_ENABLE_NG_AUTH_UI_PLACEHOLDER: "true"
+  MONGO_TRANSACTIONS_ALLOWED: "false"
   {{- if .Values.global.license.enabled }}
   ENABLE_SMP_LICENSING: '{{ .Values.global.license.enabled }}'
   SMP_LICENSE: '{{ .Values.global.license.licensekey }}'
