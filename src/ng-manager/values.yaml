@@ -51,14 +51,14 @@ ceSecret:
     key: AWS_ACCESS_KEY
   secret_key:
     name: nextgen-ce
-    key: AWS_SECRET_KEY  
+    key: AWS_SECRET_KEY
   destination_bucket:
     name: nextgen-ce
     key: AWS_DESTINATION_BUCKET
   template_url:
     name: nextgen-ce
     key: AWS_TEMPLATE_LINK
-  
+
 timescaleSecret:
   password:
     name: harness-secrets
