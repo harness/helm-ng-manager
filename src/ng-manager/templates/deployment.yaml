@@ -87,6 +87,28 @@ spec:
               value: postgres
             - name: TIMESCALE_URI
               value: 'jdbc:postgresql://timescaledb-single-chart.{{ .Release.Namespace }}:5432/harness'
+            {{- if .Values.global.ccm.enabled }}
+            - name : CE_AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ceSecret.access_key.name }}
+                  key: {{ .Values.ceSecret.access_key.key }}
+            - name : CE_AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ceSecret.secret_key.name }}
+                  key: {{ .Values.ceSecret.secret_key.key }}
+            - name : CE_AWS_DESTINATION_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ceSecret.destination_bucket.name }}
+                  key: {{ .Values.ceSecret.destination_bucket.key }}
+            - name : CE_AWS_TEMPLATE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ceSecret.template_url.name }}
+                  key: {{ .Values.ceSecret.template_url.key }}
+            {{- end }}
         envFrom:
         - configMapRef:
             name: ng-manager
