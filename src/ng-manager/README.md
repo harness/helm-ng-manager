@@ -1,6 +1,6 @@
 # ng-manager
 
-![Version: 0.2.17](https://img.shields.io/badge/Version-0.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.18](https://img.shields.io/badge/Version-0.2.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -20,7 +20,16 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| ceSecret.access_key.key | string | `"AWS_ACCESS_KEY"` |  |
+| ceSecret.access_key.name | string | `"nextgen-ce"` |  |
+| ceSecret.destination_bucket.key | string | `"AWS_DESTINATION_BUCKET"` |  |
+| ceSecret.destination_bucket.name | string | `"nextgen-ce"` |  |
+| ceSecret.secret_key.key | string | `"AWS_SECRET_KEY"` |  |
+| ceSecret.secret_key.name | string | `"nextgen-ce"` |  |
+| ceSecret.template_url.key | string | `"AWS_TEMPLATE_LINK"` |  |
+| ceSecret.template_url.name | string | `"nextgen-ce"` |  |
 | fullnameOverride | string | `""` |  |
+| global.ccm.enabled | bool | `false` |  |
 | global.license.enabled | bool | `false` |  |
 | global.license.licensekey | string | `"anexamplelicensekey"` |  |
 | global.loadbalancerURL | string | `""` |  |
