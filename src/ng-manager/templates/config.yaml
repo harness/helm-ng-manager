@@ -44,6 +44,9 @@ data:
   ACCESS_CONTROL_BASE_URL: 'http://access-control.{{ .Release.Namespace }}.svc.cluster.local:9006/api/'
   RESOURCE_GROUP_BASE_URL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
   AUDIT_CLIENT_BASEURL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
+  CENG_CLIENT_BASEURL: 'http://nextgen-ce.{{ .Release.Namespace }}.svc.cluster.local:6340/ccm/api/'
+  CE_NG_CLIENT_BASEURL: 'http://nextgen-ce.{{ .Release.Namespace }}.svc.cluster.local:6340/ccm/api/'
+  CE_SETUP_CONFIG_GCP_PROJECT_ID: {{ .Values.ceGcpSetupConfigGcpProjectId | quote }}
   CURRENT_GEN_UI_URL: '{{ .Values.global.loadbalancerURL }}/#/'
   HARNESS_ENABLE_NG_AUTH_UI_PLACEHOLDER: "true"
   MONGO_TRANSACTIONS_ALLOWED: "false"
