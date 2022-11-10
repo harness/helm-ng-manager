@@ -59,6 +59,8 @@ ceSecret:
     name: nextgen-ce
     key: AWS_TEMPLATE_LINK
 
+ceGcpSetupConfigGcpProjectId: "placeHolderGcpProjectId"
+
 timescaleSecret:
   password:
     name: harness-secrets
