@@ -1,6 +1,6 @@
 # ng-manager
 
-![Version: 0.2.19](https://img.shields.io/badge/Version-0.2.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.21](https://img.shields.io/badge/Version-0.2.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -20,6 +20,7 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| ceGcpSetupConfigGcpProjectId | string | `"placeHolderGcpProjectId"` |  |
 | ceSecret.access_key.key | string | `"AWS_ACCESS_KEY"` |  |
 | ceSecret.access_key.name | string | `"nextgen-ce"` |  |
 | ceSecret.destination_bucket.key | string | `"AWS_DESTINATION_BUCKET"` |  |
@@ -33,6 +34,7 @@ A Helm chart for Kubernetes
 | global.license.enabled | bool | `false` |  |
 | global.license.licensekey | string | `"anexamplelicensekey"` |  |
 | global.loadbalancerURL | string | `""` |  |
+| global.opa.enabled | bool | `false` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
