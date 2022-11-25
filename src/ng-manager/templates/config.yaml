@@ -56,6 +56,6 @@ data:
   {{- end }}
   {{- if .Values.global.opa.enabled }}
   OPA_SERVER_BASEURL: 'http://policy-mgmt.{{ .Release.Namespace }}.svc.cluster.local:3000/'
-  OPA_SERVER_SECRET: 'dOkdsVqdRPPRJG31XU0qY4MPqmBBMk0PTAGIKM6O7TGqhjyxScIdJe80mwh5Yb5zF3KxYBHw6B3Lfzlq'
-  OPA_CONNECTIVITY_ENABLED: true
+  OPA_SERVER_SECRET: 'HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU='
+  OPA_CONNECTIVITY_ENABLED: 'true'
   {{- end }}
