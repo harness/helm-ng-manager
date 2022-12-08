@@ -34,11 +34,11 @@ data:
   ENABLE_DEFAULT_RESOURCE_GROUP_CREATION: "true"
   ENABLE_DASHBOARD_TIMESCALE: "true"
   AUDIT_ENABLED: "true"
-  SCM_SERVICE_URI: "scm:8091"
+  SCM_SERVICE_URI: "scm-service:8091"
   MANAGER_CLIENT_BASEURL: http://harness-manager.{{ .Release.Namespace }}.svc.cluster.local:9090/api/
-  NG_MANAGER_CLIENT_BASEURL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  NG_MANAGER_CLIENT_BASEURL: 'http://ng-manager:7090/'
   MANAGER_UI_URL:  '{{ .Values.global.loadbalancerURL }}'
-  NG_MANAGER_API_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  NG_MANAGER_API_URL: 'http://ng-manager:7090/'
   NG_MANAGER_UI_URL: '{{ .Values.global.loadbalancerURL }}/ng/#/'
   LOG_STREAMING_SERVICE_BASEURL: 'http://log-service.{{ .Release.Namespace }}.svc.cluster.local:8079/'
   ACCESS_CONTROL_BASE_URL: 'http://access-control.{{ .Release.Namespace }}.svc.cluster.local:9006/api/'
