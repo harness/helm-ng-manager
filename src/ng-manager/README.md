@@ -1,6 +1,6 @@
 # ng-manager
 
-![Version: 0.2.25](https://img.shields.io/badge/Version-0.2.25-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.26](https://img.shields.io/badge/Version-0.2.26-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -36,12 +36,14 @@ A Helm chart for Kubernetes
 | global.loadbalancerURL | string | `""` |  |
 | global.opa.enabled | bool | `false` |  |
 | image.digest | string | `""` |  |
+| image.imagePullSecrets | list | `[]` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/ng-manager-signed"` |  |
 | image.tag | string | `"76019"` |  |
 | imagePullSecrets | object | `{}` |  |
 | initContainer.image.digest | string | `""` |  |
+| initContainer.image.imagePullSecrets | list | `[]` |  |
 | initContainer.image.registry | string | `"docker.io"` |  |
 | initContainer.image.repository | string | `"busybox"` |  |
 | initContainer.image.tag | string | `"1.35.0"` |  |
@@ -90,6 +92,7 @@ A Helm chart for Kubernetes
 | timescaleSecret.password.name | string | `"harness-secrets"` |  |
 | tolerations | list | `[]` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
+| waitForInitContainer.image.imagePullSecrets | list | `[]` |  |
 | waitForInitContainer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | waitForInitContainer.image.registry | string | `"docker.io"` |  |
 | waitForInitContainer.image.repository | string | `"harness/helm-init-container"` |  |
