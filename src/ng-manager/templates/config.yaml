@@ -35,14 +35,28 @@ data:
   ENABLE_DEFAULT_RESOURCE_GROUP_CREATION: "true"
   ENABLE_DASHBOARD_TIMESCALE: "true"
   AUDIT_ENABLED: "true"
-  SCM_SERVICE_URI: "scm:8091"
+  SCM_SERVICE_URI: "scm-service:8091"
   MANAGER_CLIENT_BASEURL: http://harness-manager.{{ .Release.Namespace }}.svc.cluster.local:9090/api/
-  NG_MANAGER_CLIENT_BASEURL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  NG_MANAGER_CLIENT_BASEURL: 'http://ng-manager:7090/'
   MANAGER_UI_URL:  '{{ .Values.global.loadbalancerURL }}'
-  NG_MANAGER_API_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  NG_MANAGER_API_URL: 'http://ng-manager:7090/'
   NG_MANAGER_UI_URL: '{{ .Values.global.loadbalancerURL }}/ng/#/'
   LOG_STREAMING_SERVICE_BASEURL: 'http://log-service.{{ .Release.Namespace }}.svc.cluster.local:8079/'
   ACCESS_CONTROL_BASE_URL: 'http://access-control.{{ .Release.Namespace }}.svc.cluster.local:9006/api/'
   RESOURCE_GROUP_BASE_URL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
   AUDIT_CLIENT_BASEURL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
+  CENG_CLIENT_BASEURL: 'http://nextgen-ce.{{ .Release.Namespace }}.svc.cluster.local:6340/ccm/api/'
+  CE_NG_CLIENT_BASEURL: 'http://nextgen-ce.{{ .Release.Namespace }}.svc.cluster.local:6340/ccm/api/'
+  CE_SETUP_CONFIG_GCP_PROJECT_ID: {{ .Values.ceGcpSetupConfigGcpProjectId | quote }}
   CURRENT_GEN_UI_URL: '{{ .Values.global.loadbalancerURL }}/#/'
+  HARNESS_ENABLE_NG_AUTH_UI_PLACEHOLDER: "true"
+  MONGO_TRANSACTIONS_ALLOWED: "false"
+  {{- if .Values.global.license.enabled }}
+  ENABLE_SMP_LICENSING: '{{ .Values.global.license.enabled }}'
+  SMP_LICENSE: '{{ .Values.global.license.licensekey }}'
+  {{- end }}
+  {{- if .Values.global.opa.enabled }}
+  OPA_SERVER_BASEURL: 'http://policy-mgmt.{{ .Release.Namespace }}.svc.cluster.local:3000/'
+  OPA_SERVER_SECRET: 'dOkdsVqdRPPRJG31XU0qY4MPqmBBMk0PTAGIKM6O7TGqhjyxScIdJe80mwh5Yb5zF3KxYBHw6B3Lfzlq'
+  OPA_CONNECTIVITY_ENABLED: 'true'
+  {{- end }}

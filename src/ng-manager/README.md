@@ -1,6 +1,6 @@
 # ng-manager
 
-![Version: 0.2.13](https://img.shields.io/badge/Version-0.2.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.26](https://img.shields.io/badge/Version-0.2.26-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -8,7 +8,6 @@ A Helm chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | common | 2.x.x |
 | https://harness.github.io/helm-common | harness-common | 1.x.x |
 
 ## Values
@@ -21,8 +20,21 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| ceGcpSetupConfigGcpProjectId | string | `"placeHolderGcpProjectId"` |  |
+| ceSecret.access_key.key | string | `"AWS_ACCESS_KEY"` |  |
+| ceSecret.access_key.name | string | `"nextgen-ce"` |  |
+| ceSecret.destination_bucket.key | string | `"AWS_DESTINATION_BUCKET"` |  |
+| ceSecret.destination_bucket.name | string | `"nextgen-ce"` |  |
+| ceSecret.secret_key.key | string | `"AWS_SECRET_KEY"` |  |
+| ceSecret.secret_key.name | string | `"nextgen-ce"` |  |
+| ceSecret.template_url.key | string | `"AWS_TEMPLATE_LINK"` |  |
+| ceSecret.template_url.name | string | `"nextgen-ce"` |  |
 | fullnameOverride | string | `""` |  |
+| global.ccm.enabled | bool | `false` |  |
+| global.license.enabled | bool | `false` |  |
+| global.license.licensekey | string | `"anexamplelicensekey"` |  |
 | global.loadbalancerURL | string | `""` |  |
+| global.opa.enabled | bool | `false` |  |
 | image.digest | string | `""` |  |
 | image.imagePullSecrets | list | `[]` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -46,6 +58,21 @@ A Helm chart for Kubernetes
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
+| probes.livenessProbe.failureThreshold | int | `5` |  |
+| probes.livenessProbe.httpGet.path | string | `"/health"` |  |
+| probes.livenessProbe.httpGet.port | string | `"http-ng-manager"` |  |
+| probes.livenessProbe.periodSeconds | int | `10` |  |
+| probes.livenessProbe.timeoutSeconds | int | `2` |  |
+| probes.readinessProbe.failureThreshold | int | `5` |  |
+| probes.readinessProbe.httpGet.path | string | `"/health"` |  |
+| probes.readinessProbe.httpGet.port | string | `"http-ng-manager"` |  |
+| probes.readinessProbe.periodSeconds | int | `10` |  |
+| probes.readinessProbe.timeoutSeconds | int | `2` |  |
+| probes.startupProbe.failureThreshold | int | `25` |  |
+| probes.startupProbe.httpGet.path | string | `"/health"` |  |
+| probes.startupProbe.httpGet.port | string | `"http-ng-manager"` |  |
+| probes.startupProbe.periodSeconds | int | `10` |  |
+| probes.startupProbe.timeoutSeconds | int | `2` |  |
 | replicaCount | int | `1` |  |
 | resources.limits.cpu | int | `2` |  |
 | resources.limits.memory | string | `"8192Mi"` |  |
