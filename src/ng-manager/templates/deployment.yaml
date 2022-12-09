@@ -28,10 +28,7 @@ spec:
         app: ng-manager
         {{- include "ng-manager.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+       {{- include "ng-manager.pullSecrets" . | nindent 6 }}
       serviceAccountName: {{ include "ng-manager.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -43,6 +40,12 @@ spec:
         args:
           - "pod"
           - "-lapp=harness-manager"
+      - name: wait-for-pipeline
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+        imagePullPolicy: IfNotPresent
+        args:
+          - "pod"
+          - "-lapp=pipeline-service"
       containers:
       - name: ng-manager
         image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}

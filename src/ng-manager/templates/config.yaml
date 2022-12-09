@@ -4,6 +4,7 @@ metadata:
   name: ng-manager
   namespace: {{ .Release.Namespace }}
 data:
+  GITOPS_SERVICE_CLIENT_BASEURL: http://gitops:7908/api/v1/
   CACHE_BACKEND: "REDIS"
   DEPLOY_MODE: KUBERNETES_ONPREM
   MANAGER_TARGET: harness-manager:9879
